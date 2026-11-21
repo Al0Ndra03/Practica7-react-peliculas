@@ -1,19 +1,86 @@
-# React + Vite
+# Práctica 7 - Aplicación Web de Películas con React y Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Integrante
+- Alondra Castillo (Modalidad Individual)
 
-Currently, two official plugins are available:
+## Objetivo
+Desarrollar una aplicación web de página única (SPA) utilizando React y Vite que consuma datos en tiempo real desde la API externa de TMDB, implementando navegación dinámica entre un catálogo principal y la vista de detalle de cada película, control de versiones en GitHub y despliegue en producción mediante Netlify.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Tecnologías Utilizadas
+- **React** (Biblioteca de interfaz de usuario)
+- **Vite** (Entorno de desarrollo y empaquetador)
+- **React Router DOM** (Enrutamiento declarativo del lado del cliente)
+- **CSS3** (Estilos responsivos con Grid y Flexbox)
+- **API de TMDB** (The Movie Database)
+- **Git y GitHub** (Control de versiones)
+- **Netlify** (Despliegue continuo)
 
-## React Compiler
+## Estructura General del Proyecto
+```text
+Practica7-react-peliculas/
+├── public/
+│   └── _redirects
+├── src/
+│   ├── components/
+│   │   ├── Footer.jsx / Footer.css
+│   │   ├── MovieCard.jsx / MovieCard.css
+│   │   └── MovieGrid.jsx / MovieGrid.css
+│   ├── img/
+│   │   ├── escudo-cucei.png
+│   │   └── placeholder.png
+│   ├── pages/
+│   │   ├── LandingPage.jsx
+│   │   └── MovieDetails.jsx / MovieDetails.css
+│   ├── routers/
+│   │   └── AppRouter.jsx
+│   ├── services/
+│   │   └── httpClient.js
+│   ├── utils/
+│   │   └── getMovieImg.js
+│   ├── App.jsx / App.css
+│   ├── index.css
+│   └── main.jsx
+├── .env
+├── .gitignore
+├── package.json
+└── README.md
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Para replicar este proyecto:
 
-## Expanding the ESLint configuration
+Instalación y Ejecución Local
+Clonar el repositorio:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Bash
+git clone [https://github.com/Tu_usuario/Practica7-react-peliculas.git](https://github.com/Tu_usuario/Practica7-react-peliculas.git)
 
+Entra a la carpeta del proyecto e instalar dependencias:
 
-[https://practica7-react-peliculas-v60h.netlify.app](https://practica7-react-peliculas-v60h.netlify.app)
+Bash
+cd Practica7-react-peliculas
+npm install
+Crear un archivo .env en la raíz del proyecto y agregar la clave de API de TMDB:
+
+Fragmento de código
+VITE_TMDB_API_KEY=tu_api_key_aqui
+Iniciar el servidor de desarrollo:
+
+Bash
+npm run dev
+Rutas Utilizadas
+/ — Página principal (LandingPage): muestra la cuadrícula con las tarjetas de películas obtenidas desde el endpoint /discover/movie.
+
+/movies/:movieId — Vista de detalle (MovieDetails): recibe el parámetro dinámico movieId y consulta /movie/:movieId para mostrar póster, título, géneros y sinopsis.
+
+API Utilizada
+Se utiliza la API REST de The Movie Database (TMDB v3) mediante fetch encapsulado en src/services/httpClient.js, autenticando las peticiones con una variable de entorno (VITE_TMDB_API_KEY) y configurando el idioma en es-MX.
+
+Funcionamiento
+La aplicación carga inicialmente un listado de películas en tarjetas interactivas. Al hacer clic en cualquier tarjeta, React Router redirige sin recargar el navegador hacia la ruta /movies/:movieId, mostrando la ficha técnica completa y permitiendo regresar al catálogo principal.
+
+Enlaces de Despliegue
+Repositorio en GitHub: https://github.com/Al0Ndra03/Practica7-react-peliculas
+
+Aplicación publicada en Netlify: https://practica7-react-peliculas-v60h.netlify.app/
+
+Conclusiones
+La realización de esta práctica permitió comprender el flujo completo de desarrollo moderno en React con Vite: desde la separación modular por componentes, servicios y utilidades, hasta el manejo de variables de entorno para proteger credenciales de API. Asimismo, la integración continua entre GitHub y Netlify demostró la importancia de configurar correctamente las redirecciones (_redirects) en aplicaciones SPA para evitar errores de enrutamiento en producción.
